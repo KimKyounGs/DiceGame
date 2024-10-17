@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameServer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B7829E4C-433C-4305-8373-DCD72DFCBE1F}|CardGameServer.vcxproj|C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameServer\\CardGameServer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B7829E4C-433C-4305-8373-DCD72DFCBE1F}|CardGameServer.vcxproj|solutionrelative:CardGameServer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CardGameServer.cpp",
+              "DocumentMoniker": "C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameServer\\CardGameServer.cpp",
+              "RelativeDocumentMoniker": "CardGameServer.cpp",
+              "ToolTip": "C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameServer\\CardGameServer.cpp",
+              "RelativeToolTip": "CardGameServer.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-17T08:43:05.344Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
