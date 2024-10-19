@@ -7,10 +7,16 @@
 void handleClient(sf::TcpSocket* client) {
     sf::Packet packet;
     std::string message = "Welcome to the room!";
+    // 패킷에 메시지 추가
+    packet << message;
 
     // 메시지 전송
     if (client->send(packet) != sf::Socket::Done) {
         std::cerr << "Error sending message to client" << std::endl;
+    }
+    else
+    {
+        std::cout << "클라이언트한테 메세지 보냄!" << std::endl;
     }
 
     // 클라이언트로부터 메시지 수신
@@ -22,7 +28,7 @@ void handleClient(sf::TcpSocket* client) {
             std::cout << "Client says: " << clientMessage << std::endl;
         }
         else {
-            std::cerr << "Connection closed or error occurred." << std::endl;
+            std::cerr << "Connection closed or error occurred. : " << "한 마디로 클라이언트랑 서버가 끊겼다는 거임.. ㅠㅠ" << std::endl;
             break;
         }
     }
@@ -58,6 +64,7 @@ int main() {
     // 스레드가 종료될 때까지 대기
     for (auto& thread : clientThreads) {
         if (thread.joinable()) {
+            std::cout << "Join중입니다." << std::endl;
             thread.join();
         }
     }
