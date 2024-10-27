@@ -2,6 +2,7 @@
 #include <SFML/Network.hpp>
 #include <iostream>
 
+// 서버랑 연결하는 코드.
 bool SocketConnet()
 {
     sf::TcpSocket socket;
@@ -58,7 +59,6 @@ bool isButtonClicked(const sf::RectangleShape& button, sf::Vector2i mousePos) {
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Main Menu");
-
     // 시작 버튼 만들기
     sf::RectangleShape startButton(sf::Vector2f(200, 100));
     startButton.setPosition(300, 250);

@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameClient\\CardGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:CardGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameClient\\Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,22 +24,10 @@
               "RelativeDocumentMoniker": "CardGame.cpp",
               "ToolTip": "C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameClient\\CardGame.cpp",
               "RelativeToolTip": "CardGame.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADcAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-15T12:01:40.957Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Client.cpp",
-              "DocumentMoniker": "C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameClient\\Client.cpp",
-              "RelativeDocumentMoniker": "Client.cpp",
-              "ToolTip": "C:\\Users\\ruddl\\OneDrive\\\uBB38\uC11C\\Github\\DiceGame\\CardGameClient\\Client.cpp",
-              "RelativeToolTip": "Client.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-17T08:06:51.874Z"
             }
           ]
         }
