@@ -1,51 +1,132 @@
-#include <SFML/Network.hpp>
+
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+#include <cstdlib>
+#include <map>
 
-int main() {
-    sf::TcpSocket socket;
-
-    // 서버에 연결
-    if (socket.connect("127.0.0.1", 53000) != sf::Socket::Done) {
-        std::cerr << "Error: Could not connect to server" << std::endl;
-        return -1;
+class CardGame {
+public:
+    CardGame() {
+        initializeDeck();
+        shuffleDeck();
+        dealCards();
     }
 
-    std::cout << "Connected to server!" << std::endl;
-
-    // 서버로부터 메시지 수신
-    sf::Packet packet;
-    std::string message;
-    // sf::Socket::Done은 데이터가 정상적으로 수신되었음을 의미합니다.
-    if (socket.receive(packet) == sf::Socket::Done) {
-        packet >> message; // 패킷에서 메시지 추출
-        std::cout << "Message from server: " << message << std::endl;
-    }
-    else {
-        std::cerr << "Error receiving message from server" << std::endl;
+    void playGame() {
+        int round = 1;
+        while (round <= 3) {
+            std::cout << "Round " << round << " starts!" << std::endl;
+            playRound();
+            round++;
+        }
+        determineWinner();
     }
 
-    while (true)
-    {
-        // 서버로 메시지 전송
-        sf::Packet sendPacket;
-        std::string messageToSend = "안녕 서버야~";
-        std::cin >> messageToSend;
-        sendPacket << messageToSend;  // 메시지를 패킷에 추가
+private:
+    std::vector<int> deck;
+    std::vector<int> player1Hand;
+    std::vector<int> player2Hand;
+    int player1Score = 0;
+    int player2Score = 0;
 
-        if (socket.send(sendPacket) != sf::Socket::Done) {
-            std::cerr << "Error: Could not send message to server" << std::endl;
+    void initializeDeck() {
+        // 숫자 1~7까지 각 숫자 3장씩 총 30장
+        for (int i = 1; i <= 7; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                deck.push_back(i);
+            }
+        }
+    }
+
+    void shuffleDeck() {
+        std::srand(static_cast<unsigned>(std::time(0)));
+        std::random_shuffle(deck.begin(), deck.end());
+    }
+
+    void dealCards() {
+        for (int i = 0; i < 5; ++i) {
+            player1Hand.push_back(deck.back());
+            deck.pop_back();
+            player2Hand.push_back(deck.back());
+            deck.pop_back();
+        }
+    }
+
+    void playRound() {
+        int p1Choice, p2Choice;
+
+        std::cout << "Player 1 hand: ";
+        displayHand(player1Hand);
+
+        std::cout << "Player 1, choose a card: ";
+        std::cin >> p1Choice;
+
+        std::cout << "Player 2 hand: ";
+        displayHand(player2Hand);
+
+        std::cout << "Player 2, choose a card: ";
+        std::cin >> p2Choice;
+
+        int p1Guess, p2Guess;
+        std::cout << "Player 1, guess Player 2's card: ";
+        std::cin >> p1Guess;
+        std::cout << "Player 2, guess Player 1's card: ";
+        std::cin >> p2Guess;
+
+        // 카드 공개
+        std::cout << "Player 1 played " << player1Hand[p1Choice] << " and Player 2 played " << player2Hand[p2Choice] << std::endl;
+
+        // 점수 계산
+        if (p1Guess == player2Hand[p2Choice]) {
+            player1Score += player2Hand[p2Choice];
+            std::cout << "Player 1 guessed correctly and scores " << player2Hand[p2Choice] << " points!" << std::endl;
+        }
+        if (p2Guess == player1Hand[p1Choice]) {
+            player2Score += player1Hand[p1Choice];
+            std::cout << "Player 2 guessed correctly and scores " << player1Hand[p1Choice] << " points!" << std::endl;
+        }
+
+        // 선택한 카드를 손에서 제거
+        player1Hand.erase(player1Hand.begin() + p1Choice);
+        player2Hand.erase(player2Hand.begin() + p2Choice);
+
+        // 손을 보충
+        if (!deck.empty()) {
+            player1Hand.push_back(deck.back());
+            deck.pop_back();
+            player2Hand.push_back(deck.back());
+            deck.pop_back();
+        }
+    }
+
+    void displayHand(const std::vector<int>& hand) {
+        for (size_t i = 0; i < hand.size(); ++i) {
+            std::cout << "[" << i << "] " << hand[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    void determineWinner() {
+        std::cout << "\nGame Over!" << std::endl;
+        std::cout << "Player 1 Score: " << player1Score << std::endl;
+        std::cout << "Player 2 Score: " << player2Score << std::endl;
+
+        if (player1Score > player2Score) {
+            std::cout << "Player 1 wins!" << std::endl;
+        }
+        else if (player2Score > player1Score) {
+            std::cout << "Player 2 wins!" << std::endl;
         }
         else {
-            std::cout << "서버한테 메세지 보냄 : " << messageToSend << std::endl;
-        }
-
-        if (messageToSend == "bye")
-        {
-            std::cout<< "클라이언트 종료" << std::endl;
-            break;
+            std::cout << "It's a draw!" << std::endl;
         }
     }
+};
 
-
+int main() {
+    CardGame game;
+    game.playGame();
     return 0;
 }
