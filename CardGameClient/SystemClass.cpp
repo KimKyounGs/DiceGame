@@ -1,13 +1,13 @@
 #include "SystemClass.h"
 #include "iostream"
 
-SystemClass::SystemClass() : window(sf::VideoMode(1600, 900), "CardGame"),
-							 currentState(State::MainMenu),
-							 isConnected(false) {}
+SystemClass::SystemClass() : m_window(sf::VideoMode(800, 600), "CardGame"),
+							 m_currentState(State::MainMenu),
+							 m_isConnected(false) {}
 
 void SystemClass::Run()
 {
-	while (window.isOpen())
+	while (m_window.isOpen())
 	{
 		ProcessEvents();
 		Update();
@@ -18,55 +18,61 @@ void SystemClass::Run()
 void SystemClass::ProcessEvents()
 {
 	sf::Event event;
-	while (window.pollEvent(event))
+	while (m_window.pollEvent(event))
 	{
-		if (event.type == sf::Event::Closed) window.close();
+		if (event.type == sf::Event::Closed) m_window.close();
 
-		if (currentState == State::MainMenu)
+		if (m_currentState == State::MainMenu)
 		{
-			if (mainMenu.HandleEvent(event))
+			if (m_mainMenu.HandleEvent(event, m_window))
 			{
 				if (ConnectToServer())
 				{
-					currentState = State::GameScreen;
+					std::cout << "서버 연결" << std::endl;
+					m_currentState = State::MainGame;
 				}
 			}
 		}
-
-		else if (currentState == State::GameScreen)
+		else if (m_currentState == State::MainGame)
 		{
-			chat.HandleEvent(event, socket);
+			std::cout << "SystemClass::ProcessEvents()" << std::endl;
+			//gameScreen.HandleEvent();
+			//m_chat.HandleEvent(event, m_socket);
 		}
 	}
 }
 
 void SystemClass::Update()
 {
-	if (currentState == State::GameScreen) {
-		chat.Update(socket);
+	if (m_currentState == State::MainMenu)
+	{
+		//mainMenu.Update();
+	}
+	else if (m_currentState == State::MainGame) {
+		// m_chat.Update(m_socket);
 	}
 }
 
 void SystemClass::Render()
 {
-	window.clear();
-	if (currentState == State::MainMenu) {
-		mainMenu.Draw(window);
+	m_window.clear();
+	if (m_currentState == State::MainMenu) {
+		m_mainMenu.Draw(m_window);
 	}
-	else if (currentState == State::GameScreen) {
-		gameScreen.draw(window);
-		chat.Draw(window);
+	else if (m_currentState == State::MainGame) {
+		m_mainGame.Draw(m_window);
+		// m_chat.Draw(m_window);
 	}
-	window.display();
+	m_window.display();
 }
 
 bool SystemClass::ConnectToServer()
 {
-	if (socket.connect("127.0.0.1", 53000) != sf::Socket::Done) {
+	if (m_socket.connect("127.0.0.1", 53000) != sf::Socket::Done) {
 		std::cerr << "Error: Could not connect to server" << std::endl;
 		return false;
 	}
-	isConnected = true;
+	m_isConnected = true;
 	std::cout << "Connected to server!" << std::endl;
 	return true;
 }

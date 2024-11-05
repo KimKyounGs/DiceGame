@@ -16,6 +16,9 @@
     <Filter Include="Image">
       <UniqueIdentifier>{2cc9efdd-2a52-4c1d-bee2-5661b0c1907b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Font">
+      <UniqueIdentifier>{9a8734cf-baf6-4dde-8450-f8438a30fb12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,7 +30,7 @@
     <ClCompile Include="SystemClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Chat.cpp">
@@ -44,7 +47,7 @@
     <ClInclude Include="SystemClass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="MainGame.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Chat.h">
@@ -58,5 +61,10 @@
     <Image Include="Image\StartButton.png">
       <Filter>Image</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Font\RightFont.ttf">
+      <Filter>Font</Filter>
+    </Font>
   </ItemGroup>
 </Project>

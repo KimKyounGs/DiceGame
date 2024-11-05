@@ -2,35 +2,37 @@
 #include <iostream>
 
 Chat::Chat() {
-    inputBox.setSize(sf::Vector2f(400, 30));
-    inputBox.setPosition(50, 550);
-    inputBox.setFillColor(sf::Color::White);
+    m_inputBox.setSize(sf::Vector2f(400, 30));
+    m_inputBox.setPosition(50, 550);
+    m_inputBox.setFillColor(sf::Color::Cyan);
 
-    if (!font.loadFromFile("Arial.ttf")) {
+    if (!m_font.loadFromFile("Font\\RightFont.ttf")) {
         std::cerr << "Font load error" << std::endl;
     }
 
-    inputText.setFont(font);
-    inputText.setCharacterSize(20);
-    inputText.setFillColor(sf::Color::Black);
-    inputText.setPosition(55, 555);
+    m_inputText.setFont(m_font);
+    m_inputText.setCharacterSize(20);
+    m_inputText.setFillColor(sf::Color::Black);
+    m_inputText.setPosition(55, 555);
 }
 
 void Chat::HandleEvent(const sf::Event& event, sf::TcpSocket& socket) {
+    std::cout << "ChatHandleEvent start" << std::endl;
     if (event.type == sf::Event::TextEntered) {
         if (event.text.unicode == '\r') {
             SendMessage(socket);
         }
         else if (event.text.unicode == '\b') {
-            if (!currentInput.empty()) {
-                currentInput.pop_back();
+            if (!m_currentInput.empty()) {
+                m_currentInput.pop_back();
             }
         }
         else {
-            currentInput += static_cast<char>(event.text.unicode);
+            m_currentInput += static_cast<char>(event.text.unicode);
         }
-        inputText.setString(currentInput);
+        m_inputText.setString(m_currentInput);
     }
+    std::cout << "ChatHandleEvent end" << std::endl;
 }
 
 void Chat::Update(sf::TcpSocket& socket) {
@@ -38,34 +40,34 @@ void Chat::Update(sf::TcpSocket& socket) {
     if (socket.receive(packet) == sf::Socket::Done) {
         std::string message;
         packet >> message;
-        messages.push_back("Server: " + message);
+        m_messages.push_back("Server: " + message);
     }
 }
 
 void Chat::Draw(sf::RenderWindow& window) {
-    window.draw(inputBox);
-    window.draw(inputText);
-
+    window.draw(m_inputBox);
+    window.draw(m_inputText);
     float yOffset = 500;
-    for (auto it = messages.rbegin(); it != messages.rend(); ++it) {
-        sf::Text text(*it, font, 20);
+    for (auto it = m_messages.rbegin(); it != m_messages.rend(); ++it) {
+        sf::Text text(*it, m_font, 20);
         text.setFillColor(sf::Color::Black);
         text.setPosition(50, yOffset);
         window.draw(text);
         yOffset -= 25;
         if (yOffset < 50) break;
     }
+    std::cout << "draw ³¡" << std::endl;
 }
 
 void Chat::SendMessage(sf::TcpSocket& socket) {
-    if (!currentInput.empty()) {
+    if (!m_currentInput.empty()) {
         sf::Packet packet;
-        packet << currentInput;
+        packet << m_currentInput;
 
         if (socket.send(packet) == sf::Socket::Done) {
-            messages.push_back("You: " + currentInput);
-            currentInput.clear();
-            inputText.setString("");
+            m_messages.push_back("You: " + m_currentInput);
+            m_currentInput.clear();
+            m_inputText.setString("");
         }
         else {
             std::cerr << "Error: Could not send message to server" << std::endl;

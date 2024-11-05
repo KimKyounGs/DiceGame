@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include "MainMenu.h"
-#include "Game.h"
+#include "MainGame.h"
 #include "Chat.h"
 
 /// <summary>
@@ -18,22 +18,21 @@ class SystemClass
 {
 public:
     SystemClass();
-    SystemClass(const SystemClass&);
-    ~SystemClass();
 
     void Run();
 
 private:
-    enum class State { MainMenu, GameScreen };
-    State currentState;
-    bool isConnected;
+    enum class State { MainMenu, MainGame};
+    State m_currentState;
+    bool m_isConnected;
 
-    sf::RenderWindow window;
-    MainMenu mainMenu;
-    GameScreen gameScreen;
-    Chat chat;
-    sf::TcpSocket socket;
+    sf::RenderWindow m_window;
+    MainMenu m_mainMenu;
+    MainGame m_mainGame;
+    Chat m_chat;
+    sf::TcpSocket m_socket;
 
+private:
     void ProcessEvents();
     void Update();
     void Render();

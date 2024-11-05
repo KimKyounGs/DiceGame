@@ -1,1 +1,5 @@
-C:\GitProject\DiceGame\CardGameClient\CardGame.cpp;C:\GitProject\DiceGame\CardGameClient\CardGame\x64\Debug\CardGame.obj
+C:\GitProject\DiceGame\CardGameClient\Chat.cpp;C:\GitProject\DiceGame\CardGameClient\CardGame\x64\Debug\Chat.obj
+C:\GitProject\DiceGame\CardGameClient\MainGame.cpp;C:\GitProject\DiceGame\CardGameClient\CardGame\x64\Debug\MainGame.obj
+C:\GitProject\DiceGame\CardGameClient\main.cpp;C:\GitProject\DiceGame\CardGameClient\CardGame\x64\Debug\main.obj
+C:\GitProject\DiceGame\CardGameClient\MainMenu.cpp;C:\GitProject\DiceGame\CardGameClient\CardGame\x64\Debug\MainMenu.obj
+C:\GitProject\DiceGame\CardGameClient\SystemClass.cpp;C:\GitProject\DiceGame\CardGameClient\CardGame\x64\Debug\SystemClass.obj

@@ -15,11 +15,11 @@ public:
     void Draw(sf::RenderWindow& window);
 
 private:
-    sf::RectangleShape inputBox;
-    sf::Text inputText;
-    sf::Font font;
-    std::string currentInput;
-    std::vector<std::string> messages;
+    sf::RectangleShape m_inputBox;
+    sf::Text m_inputText;
+    sf::Font m_font;
+    std::string m_currentInput;
+    std::vector<std::string> m_messages;
 
     void SendMessage(sf::TcpSocket& socket);
 };

@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Chat.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -155,12 +155,15 @@
   <ItemGroup>
     <ClInclude Include="Card.h" />
     <ClInclude Include="Chat.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="MainGame.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="SystemClass.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\StartButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Font\RightFont.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
