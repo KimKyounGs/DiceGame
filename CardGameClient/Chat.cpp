@@ -1,7 +1,9 @@
 #include "Chat.h"
 #include <iostream>
+#include <thread>
 
-Chat::Chat() {
+Chat::Chat() : m_isChatting(false)
+{
     m_inputBox.setSize(sf::Vector2f(400, 30));
     m_inputBox.setPosition(50, 550);
     m_inputBox.setFillColor(sf::Color::Cyan);
@@ -16,38 +18,67 @@ Chat::Chat() {
     m_inputText.setPosition(55, 555);
 }
 
-void Chat::HandleEvent(const sf::Event& event, sf::TcpSocket& socket) {
+Chat::~Chat()
+{
+    if (m_receivingThread.joinable()) {
+        m_receivingThread.join();  // 수신 스레드가 종료될 때까지 대기
+    }
+}
+
+void Chat::HandleEvent(const sf::Event& event, sf::TcpSocket& socket) 
+{
     std::cout << "ChatHandleEvent start" << std::endl;
-    if (event.type == sf::Event::TextEntered) {
-        if (event.text.unicode == '\r') {
+
+    // O 키를 눌러서 채팅 모드 전환
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O) 
+    {
+        m_isChatting = !m_isChatting;
+        std::cout << "Chat mode " << (m_isChatting ? "enabled" : "disabled") << std::endl;
+    }
+
+    // 채팅 모드가 활성화된 상태에서만 텍스트 입력 처리
+    // sf::Event::TextEntered : 키보드로 입력한 텍스트를 감지
+    if (m_isChatting && event.type == sf::Event::TextEntered)
+    {
+        if (event.text.unicode == '\r') // 엔터키로 메시지 전송
+        {
             SendMessage(socket);
+            m_isChatting = false;
         }
-        else if (event.text.unicode == '\b') {
-            if (!m_currentInput.empty()) {
+        else if (event.text.unicode == '\b') // 백스페이스 
+        {
+            if (!m_currentInput.empty())
+            {
                 m_currentInput.pop_back();
             }
         }
-        else {
+        else
+        {
             m_currentInput += static_cast<char>(event.text.unicode);
         }
         m_inputText.setString(m_currentInput);
     }
-    std::cout << "ChatHandleEvent end" << std::endl;
+
 }
 
-void Chat::Update(sf::TcpSocket& socket) {
-    sf::Packet packet;
-    if (socket.receive(packet) == sf::Socket::Done) {
-        std::string message;
-        packet >> message;
-        m_messages.push_back("Server: " + message);
+void Chat::Update(sf::TcpSocket& socket) 
+{
+    // 뮤텍스를 잠그고 수신 버퍼의 메시지를 m_messages로 옮김
+    std::lock_guard<std::mutex> lock(m_mutex);
+    for (const auto& msg : m_receivedMessages) {
+        m_messages.push_back(msg);
     }
+    m_receivedMessages.clear();
 }
 
-void Chat::Draw(sf::RenderWindow& window) {
+void Chat::Draw(sf::RenderWindow& window) 
+{
     window.draw(m_inputBox);
     window.draw(m_inputText);
     float yOffset = 500;
+
+    // m_messages 접근 시 잠금
+    std::lock_guard<std::mutex> lock(m_mutex);
     for (auto it = m_messages.rbegin(); it != m_messages.rend(); ++it) {
         sf::Text text(*it, m_font, 20);
         text.setFillColor(sf::Color::Black);
@@ -56,10 +87,39 @@ void Chat::Draw(sf::RenderWindow& window) {
         yOffset -= 25;
         if (yOffset < 50) break;
     }
-    std::cout << "draw 끝" << std::endl;
 }
 
-void Chat::SendMessage(sf::TcpSocket& socket) {
+void Chat::StartReceiving(sf::TcpSocket& socket)
+{
+    m_receivingThread = std::thread(&Chat::ReceiveMessage, this, std::ref(socket));
+}
+
+void Chat::ReceiveMessage(sf::TcpSocket& socket)
+{
+    while (true)
+    {
+        sf::Packet packet;
+        if (socket.receive(packet) == sf::Socket::Done)
+        {
+            std::string message;
+            packet >> message;
+
+            // 수신 메시지를 뮤텍스로 보호하고 m_receivedMessages에 추가
+            std::lock_guard<std::mutex> lock(m_mutex);
+            m_receivedMessages.push_back("Server: " + message);
+        }
+        else
+        {
+            std::cerr << "Error : 메시지를 수신받을 수 없습니다!" << std::endl;
+            break;
+        }
+    }
+
+}
+
+void Chat::SendMessage(sf::TcpSocket& socket) 
+{
+    // 메시지를 보낼 때
     if (!m_currentInput.empty()) {
         sf::Packet packet;
         packet << m_currentInput;

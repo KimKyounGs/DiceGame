@@ -35,7 +35,6 @@ void SystemClass::ProcessEvents()
 		}
 		else if (m_currentState == State::MainGame)
 		{
-			std::cout << "SystemClass::ProcessEvents()" << std::endl;
 			//gameScreen.HandleEvent();
 			//m_chat.HandleEvent(event, m_socket);
 		}
@@ -61,7 +60,7 @@ void SystemClass::Render()
 	}
 	else if (m_currentState == State::MainGame) {
 		m_mainGame.Draw(m_window);
-		// m_chat.Draw(m_window);
+		m_chat.Draw(m_window);
 	}
 	m_window.display();
 }
@@ -74,5 +73,6 @@ bool SystemClass::ConnectToServer()
 	}
 	m_isConnected = true;
 	std::cout << "Connected to server!" << std::endl;
+	m_chat.StartReceiving(m_socket);  // m_chat의 수신 스레드 시작
 	return true;
 }

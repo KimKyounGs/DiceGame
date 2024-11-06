@@ -4,7 +4,7 @@
 #include <vector>
 
 // 클라이언트와 통신하는 함수
-void handleClient(sf::TcpSocket* client) {
+void HandleClient(sf::TcpSocket* client) {
     sf::Packet packet;
     std::string message = "Welcome to the room!";
     // 패킷에 메시지 추가
@@ -28,7 +28,7 @@ void handleClient(sf::TcpSocket* client) {
             std::cout << "Client says: " << clientMessage << std::endl;
         }
         else {
-            std::cerr << "Connection closed or error occurred. : " << "한 마디로 클라이언트랑 서버가 끊겼다는 거임.. ㅠㅠ" << std::endl;
+            std::cerr << "클라이언트랑 서버가 끊겼음.. ㅠㅠ" << std::endl;
             break;
         }
     }
@@ -52,16 +52,17 @@ int main() {
         sf::TcpSocket* client = new sf::TcpSocket;
 
         // 새로운 클라이언트 수락
+        // 스레드를 생성해서 클라이언트를 독립적으로 실행함.
         if (listener.accept(*client) == sf::Socket::Done) {
             std::cout << "New client connected!" << std::endl;
-            clientThreads.emplace_back(std::thread(handleClient, client));  // 새로운 스레드에서 클라이언트 처리
+            clientThreads.emplace_back(std::thread(HandleClient, client));  // 새로운 스레드에서 클라이언트 처리
         }
         else {
             delete client;
         }
     }
 
-    // 스레드가 종료될 때까지 대기
+    // 스레드가 종료될 때까지 대기 -> 메인 스레드는 나머지 스레드가 종료될 때까지 기다리기.
     for (auto& thread : clientThreads) {
         if (thread.joinable()) {
             std::cout << "Join중입니다." << std::endl;
