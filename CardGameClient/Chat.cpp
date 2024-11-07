@@ -1,6 +1,5 @@
 #include "Chat.h"
 #include <iostream>
-#include <thread>
 
 Chat::Chat() : m_isChatting(false)
 {
@@ -9,7 +8,7 @@ Chat::Chat() : m_isChatting(false)
     m_inputBox.setFillColor(sf::Color::Cyan);
 
     if (!m_font.loadFromFile("Font\\RightFont.ttf")) {
-        std::cerr << "Font load error" << std::endl;
+        std::cerr << "폰트 로드 실패" << std::endl;
     }
 
     m_inputText.setFont(m_font);
@@ -27,13 +26,11 @@ Chat::~Chat()
 
 void Chat::HandleEvent(const sf::Event& event, sf::TcpSocket& socket) 
 {
-    std::cout << "ChatHandleEvent start" << std::endl;
-
     // O 키를 눌러서 채팅 모드 전환
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O) 
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O && !m_isChatting) 
     {
         m_isChatting = !m_isChatting;
-        std::cout << "Chat mode " << (m_isChatting ? "enabled" : "disabled") << std::endl;
+        std::cout << "Chat mode " << (m_isChatting ? "활성화" : "비활성화") << std::endl;
     }
 
     // 채팅 모드가 활성화된 상태에서만 텍스트 입력 처리
@@ -45,7 +42,7 @@ void Chat::HandleEvent(const sf::Event& event, sf::TcpSocket& socket)
             SendMessage(socket);
             m_isChatting = false;
         }
-        else if (event.text.unicode == '\b') // 백스페이스 
+        else if (event.text.unicode == '\b') // 백스페이스
         {
             if (!m_currentInput.empty())
             {
@@ -58,7 +55,6 @@ void Chat::HandleEvent(const sf::Event& event, sf::TcpSocket& socket)
         }
         m_inputText.setString(m_currentInput);
     }
-
 }
 
 void Chat::Update(sf::TcpSocket& socket) 
@@ -88,7 +84,10 @@ void Chat::Draw(sf::RenderWindow& window)
         if (yOffset < 50) break;
     }
 }
-
+/// <summary>
+/// 서버랑 연결되었을 때 한번 호출하여 스레드를 생성하고 이 스레드를 통해서 계속해서 서버에게 수신 받기
+/// </summary>
+/// <param name="socket"></param>
 void Chat::StartReceiving(sf::TcpSocket& socket)
 {
     m_receivingThread = std::thread(&Chat::ReceiveMessage, this, std::ref(socket));
@@ -106,7 +105,7 @@ void Chat::ReceiveMessage(sf::TcpSocket& socket)
 
             // 수신 메시지를 뮤텍스로 보호하고 m_receivedMessages에 추가
             std::lock_guard<std::mutex> lock(m_mutex);
-            m_receivedMessages.push_back("Server: " + message);
+            m_receivedMessages.push_back("서버: " + message);
         }
         else
         {
@@ -114,7 +113,6 @@ void Chat::ReceiveMessage(sf::TcpSocket& socket)
             break;
         }
     }
-
 }
 
 void Chat::SendMessage(sf::TcpSocket& socket) 
@@ -125,12 +123,13 @@ void Chat::SendMessage(sf::TcpSocket& socket)
         packet << m_currentInput;
 
         if (socket.send(packet) == sf::Socket::Done) {
-            m_messages.push_back("You: " + m_currentInput);
+            std::lock_guard<std::mutex> lock(m_mutex);
+            m_messages.push_back("나: " + m_currentInput);
             m_currentInput.clear();
             m_inputText.setString("");
         }
         else {
-            std::cerr << "Error: Could not send message to server" << std::endl;
+            std::cerr << "Error: 서버에 메시지를 송신할 수 없습니다!" << std::endl;
         }
     }
 }

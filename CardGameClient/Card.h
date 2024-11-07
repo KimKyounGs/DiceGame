@@ -3,13 +3,6 @@
 #define _CARD_H_
 
 /// <summary>
-/// include
-/// </summary>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <iostream>
-
-/// <summary>
 /// Class Name = CardClass
 /// </summary>
 class Card {
@@ -20,21 +13,30 @@ private:
 		int x;
 		int y;
 	};
+	enum class Parity
+	{
+		Odd,
+		Even,
+		Defalut
+	};
+	Card(const Card&);
 
 public:
 	Card();
-	Card(const Card&);
-	~Card();
-
-	// 프로퍼티 함수
 	
 private:
-	int m_CardId;
-	sf::Texture m_Cardtexture;
-	CardPoisition m_CardPosition;
+	int m_cardNum;
+	Parity m_cardParity;
+	bool m_isUsed;
+	// sf::Texture m_Cardtexture;
+	// CardPoisition m_CardPosition;
 
 private:
 
+
+public:
+	void SetNum(const int& num);
+	const int GetNum();
 };
 
 

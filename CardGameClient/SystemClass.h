@@ -11,6 +11,11 @@
 #include "MainGame.h"
 #include "Chat.h"
 
+namespace System
+{
+    enum class State { MainMenu, MainGame};
+}
+
 /// <summary>
 /// Class Name = SystemClass
 /// </summary>
@@ -22,8 +27,7 @@ public:
     void Run();
 
 private:
-    enum class State { MainMenu, MainGame};
-    State m_currentState;
+    System::State m_currentState;
     bool m_isConnected;
 
     sf::RenderWindow m_window;

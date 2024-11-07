@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="Chat.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -155,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Card.h" />
     <ClInclude Include="Chat.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="SystemClass.h" />
