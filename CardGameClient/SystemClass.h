@@ -21,11 +21,6 @@ namespace System
 /// </summary>
 class SystemClass
 {
-public:
-    SystemClass();
-
-    void Run();
-
 private:
     System::State m_currentState;
     bool m_isConnected;
@@ -35,6 +30,11 @@ private:
     MainGame m_mainGame;
     Chat m_chat;
     sf::TcpSocket m_socket;
+
+public:
+    SystemClass();
+
+    void Run();
 
 private:
     void ProcessEvents();

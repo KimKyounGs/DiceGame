@@ -21,9 +21,6 @@ private:
 	};
 	Card(const Card&);
 
-public:
-	Card();
-	
 private:
 	int m_cardNum;
 	Parity m_cardParity;
@@ -31,7 +28,8 @@ private:
 	// sf::Texture m_Cardtexture;
 	// CardPoisition m_CardPosition;
 
-private:
+public:
+	Card();
 
 
 public:

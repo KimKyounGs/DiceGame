@@ -9,6 +9,11 @@
 class GameManager 
 {
 private:
+	Card m_playerCards[10];
+	Card m_enemyCards[10];
+	bool m_isMyTurn;
+
+private:
 	GameManager(const GameManager&);
 	~GameManager();
 
@@ -17,10 +22,7 @@ public:
 	
 	void GameStart(); // 게임 시작할 때 함수
 	void TurnChange(); // 턴 변경
-private:
-	Card m_playerCards[10];
-	Card m_enemyCards[10];
-	bool m_isMyTurn;
+
 };
 
 

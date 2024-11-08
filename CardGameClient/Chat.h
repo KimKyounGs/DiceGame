@@ -10,13 +10,6 @@
 #include <mutex>
 
 class Chat {
-public:
-    Chat();
-    ~Chat();
-    void HandleEvent(const sf::Event& event, sf::TcpSocket& socket);
-    void Update(sf::TcpSocket& socket);
-    void Draw(sf::RenderWindow& window);
-    void StartReceiving(sf::TcpSocket& socket);
 
 private:
     sf::RectangleShape m_inputBox;
@@ -29,8 +22,18 @@ private:
     std::mutex m_mutex; // m_messages와 m_receivedMessages 보호용 뮤텍스
     bool m_isChatting;
 
+private:
     void SendMessage(sf::TcpSocket& socket);
     void ReceiveMessage(sf::TcpSocket& socket);
+
+public:
+    Chat();
+    ~Chat();
+    void HandleEvent(const sf::Event& event, sf::TcpSocket& socket);
+    void Update(sf::TcpSocket& socket);
+    void Draw(sf::RenderWindow& window);
+    void StartReceiving(sf::TcpSocket& socket);
+
 };
 
 #endif // CHAT_H
