@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <functional> // 콜백함수 사용.
 #include "Card.h"
 
 class Player
