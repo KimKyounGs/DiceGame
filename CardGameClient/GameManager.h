@@ -22,7 +22,6 @@ public:
 	
 	void GameStart(); // 게임 시작할 때 함수
 	void TurnChange(); // 턴 변경
-
 };
 
 
