@@ -20,6 +20,7 @@ private:
 		Defalut
 	};
 	Card(const Card&);
+	Card& operator=(const Card&);
 
 private:
 	int m_cardNum;
