@@ -11,10 +11,10 @@
 class GameManager 
 {
 private:
-	Card* m_playerCards[10];
-	Card* m_enemyCards[10];
-	Player* player;
-	bool m_isMyTurn;
+	Player& m_player; // 플레이어
+	Card* m_playerCards[10]; // 플레이어 카드
+	Card* m_enemyCards[10]; // 적 카드
+	bool m_isMyTurn; // 턴 유무
 
 private:
 	GameManager(const GameManager&); // 사용 안하는 함수 금하기
@@ -24,7 +24,7 @@ public:
 	GameManager();
 	
 	void GameStart(); // 게임 시작할 때 함수
-	void TurnChange(); // 턴 변경 함수를 콜백 준비
+	void ChangeTurn(); // 턴 변경 함수를 콜백 준비
 };
 
 
