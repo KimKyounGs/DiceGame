@@ -3,7 +3,10 @@
 
 Player::Player()
 {
-
+    for (int i = 1; i <= 10; i++)
+    {
+        m_cards[i].SetNum(i);
+    }
 }
 
 void Player::setTurnChangeCallback(const std::function<void()>& callback) {

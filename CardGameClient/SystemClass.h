@@ -29,8 +29,11 @@ private:
     MainMenu m_mainMenu;
     MainGame m_mainGame;
     Chat m_chat;
-    sf::TcpSocket m_socket;
 
+    sf::TcpSocket m_menuSocket;   // 메뉴용 소켓
+    sf::TcpSocket m_gameSocket;   // 게임용 소켓
+    sf::TcpSocket m_chatSocket;   // 채팅용 소켓
+       
 public:
     SystemClass();
 

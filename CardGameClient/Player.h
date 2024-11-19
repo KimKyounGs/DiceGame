@@ -11,7 +11,7 @@ class Player
 {
 private:
 	std::string m_playerName;
-	std::vector<Card> m_cards;
+	Card m_cards[10]; // 플레이어 카드
 
 private:
 	Player(const Player&); // 금기

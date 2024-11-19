@@ -3,6 +3,7 @@
 #define MAINGAME_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 
 namespace Game
 {
@@ -15,6 +16,7 @@ private:
 
 public:
     void Draw(sf::RenderWindow& window);
+    void Update(sf::TcpSocket& socket);
 };
 
 #endif // MAINGAME_H

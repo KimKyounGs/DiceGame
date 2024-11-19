@@ -5,7 +5,8 @@
 /// <summary>
 /// Class Name = CardClass
 /// </summary>
-class Card {
+class Card 
+{
 
 private:
 	struct CardPoisition
@@ -30,15 +31,13 @@ private:
 	// CardPoisition m_CardPosition;
 
 public:
-	Card();
-
-
-public:
+	Card();	
 	void SetNum(const int& num);
 	const int GetNum();
+
+private:
+	// bool operator>(const Card);
+
 };
-
-
-
 
 #endif // !_CARD_H_

@@ -12,7 +12,7 @@ void HandleClient(sf::TcpSocket* client) {
 
     // 메시지 전송
     if (client->send(packet) != sf::Socket::Done) {
-        std::cerr << "Error sending message to client" << std::endl;
+        std::cerr << "Error sendicmm,ㅡㅡng message to client" << std::endl;
     }
     else
     {

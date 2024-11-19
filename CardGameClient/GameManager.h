@@ -5,15 +5,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <functional>
-#include "Card.h"
+#include "MainGame.h"
 #include "Player.h"
+
 
 class GameManager 
 {
 private:
-	Player& m_player; // 플레이어
-	Card* m_playerCards[10]; // 플레이어 카드
-	Card* m_enemyCards[10]; // 적 카드
+	Player m_player; // 플레이어
 	bool m_isMyTurn; // 턴 유무
 
 private:

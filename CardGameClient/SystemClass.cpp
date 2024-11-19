@@ -36,7 +36,7 @@ void SystemClass::ProcessEvents()
 		else if (m_currentState == System::State::MainGame)
 		{
 			//gameScreen.HandleEvent();
-			m_chat.HandleEvent(event, m_socket);
+			m_chat.HandleEvent(event, m_gameSocket);
 		}
 	}
 }
@@ -45,10 +45,11 @@ void SystemClass::Update()
 {
 	if (m_currentState == System::State::MainMenu)
 	{
-		//mainMenu.Update();
+		// mainMenu.Update();
 	}
 	else if (m_currentState == System::State::MainGame) {
-		// m_chat.Update(m_socket);
+		m_mainGame.Update(m_gameSocket);
+		m_chat.Update(m_chatSocket);
 	}
 }
 
@@ -56,24 +57,24 @@ void SystemClass::Render()
 {
 	m_window.clear();
 	if (m_currentState == System::State::MainMenu) {
-		m_mainMenu.Draw(m_window);
+		m_mainMenu.Draw(m_window);	// 메인메뉴 그리기
 	}
 	else if (m_currentState == System::State::MainGame) {
-		m_mainGame.Draw(m_window);
-		m_chat.Draw(m_window);
+		m_mainGame.Draw(m_window);	// 메인게임 그리기
+		m_chat.Draw(m_window);	// 채팅 그리기
 	}
 	m_window.display();
 }
 
 bool SystemClass::ConnectToServer()
 {
-	if (m_socket.connect("127.0.0.1", 53000) != sf::Socket::Done) {
+	if (m_menuSocket.connect("127.0.0.1", 53000) != sf::Socket::Done) {
 		std::cerr << "Error: Could not connect to server" << std::endl;
 		m_isConnected = false;
 		return false;
 	}
 	m_isConnected = true;
 	std::cout << "Connected to server!" << std::endl;
-	m_chat.StartReceiving(m_socket);  // m_chat의 수신 스레드 시작
+	m_chat.StartReceiving(m_menuSocket);	// m_chat의 수신 스레드 시작
 	return true;
 }
