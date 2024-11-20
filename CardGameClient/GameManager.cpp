@@ -24,5 +24,4 @@ void GameManager::ChangeTurn()
 	{
 		std::cout << "»ó´ëÅÏ!" << std::endl;
 	}
-
 }

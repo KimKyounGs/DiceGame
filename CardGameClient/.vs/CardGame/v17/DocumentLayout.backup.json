@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "C:\\GitProject\\DiceGame\\CardGameClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\MainGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:MainGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\Card.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Card.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|C:\\GitProject\\DiceGame\\CardGameClient\\MainGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{67A74E30-C134-4601-B6C5-B0CB4C4FC3AE}|CardGame.vcxproj|solutionrelative:MainGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,57 +42,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "MainGame.h",
+              "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\MainGame.h",
+              "RelativeDocumentMoniker": "MainGame.h",
+              "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\MainGame.h",
+              "RelativeToolTip": "MainGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-18T16:17:04.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "GameManager.cpp",
               "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.cpp",
               "RelativeDocumentMoniker": "GameManager.cpp",
               "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.cpp",
               "RelativeToolTip": "GameManager.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-07T09:15:16.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "GameManager.h",
               "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.h",
               "RelativeDocumentMoniker": "GameManager.h",
               "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\GameManager.h",
               "RelativeToolTip": "GameManager.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-07T09:15:01.976Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Card.cpp",
-              "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.cpp",
-              "RelativeDocumentMoniker": "Card.cpp",
-              "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.cpp",
-              "RelativeToolTip": "Card.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-15T07:02:54.396Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Card.h",
-              "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.h",
-              "RelativeDocumentMoniker": "Card.h",
-              "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.h",
-              "RelativeToolTip": "Card.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-15T07:02:36.566Z"
             },
             {
               "$type": "Document",
@@ -94,22 +91,61 @@
               "RelativeDocumentMoniker": "Player.cpp",
               "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\Player.cpp",
               "RelativeToolTip": "Player.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-15T07:14:38.532Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Player.h",
               "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\Player.h",
               "RelativeDocumentMoniker": "Player.h",
               "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\Player.h",
               "RelativeToolTip": "Player.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-15T07:14:49.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Card.cpp",
+              "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.cpp",
+              "RelativeDocumentMoniker": "Card.cpp",
+              "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.cpp",
+              "RelativeToolTip": "Card.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-15T07:02:54.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Card.h",
+              "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.h",
+              "RelativeDocumentMoniker": "Card.h",
+              "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\Card.h",
+              "RelativeToolTip": "Card.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-15T07:02:36.566Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainGame.cpp",
+              "DocumentMoniker": "C:\\GitProject\\DiceGame\\CardGameClient\\MainGame.cpp",
+              "RelativeDocumentMoniker": "MainGame.cpp",
+              "ToolTip": "C:\\GitProject\\DiceGame\\CardGameClient\\MainGame.cpp",
+              "RelativeToolTip": "MainGame.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-18T16:17:02.739Z",
               "EditorCaption": ""
             }
           ]

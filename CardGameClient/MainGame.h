@@ -15,6 +15,7 @@ class MainGame {
 private:
 
 public:
+    MainGame();
     void Draw(sf::RenderWindow& window);
     void Update(sf::TcpSocket& socket);
 };
