@@ -8,19 +8,24 @@
 #include <mutex>
 #include <condition_variable>
 #include <atomic>
+#include <fstream>
 
 // 명령어 처리 핸들러
 std::unordered_map<std::string, std::function<void(const std::string&, sf::TcpSocket*)>> commandHandlers;
 
-// 작업 큐와 스레드 풀 관련 변수
+// 작업 큐 및 스레드 풀 관련 변수
 std::queue<sf::TcpSocket*> taskQueue;
 std::mutex queueMutex;
 std::condition_variable condition;
 std::atomic<bool> stop(false); // 서버 종료 플래그
 
 // 매칭 대기열 관련 변수
-std::queue<sf::TcpSocket*> matchingQueue; // 매칭 대기열
-std::mutex matchingMutex; // 매칭 대기열 보호용 뮤텍스
+std::queue<sf::TcpSocket*> matchingQueue;
+std::mutex matchingMutex;
+
+// 로깅 시스템
+std::mutex logMutex;
+std::ofstream logFile("server.log", std::ios::app);
 
 // 함수 선언
 void ThreadWorker();
@@ -31,6 +36,13 @@ void SetTurn(const std::string& data, sf::TcpSocket* client);
 void HandleMatchingRequest(const std::string& data, sf::TcpSocket* client);
 void StartMatching(sf::TcpSocket* client);
 
+// 로그 기록 함수
+void Log(const std::string& message) {
+    std::lock_guard<std::mutex> lock(logMutex);
+    logFile << message << std::endl;
+    std::cout << message << std::endl;
+}
+
 // 스레드 풀에서 실행되는 작업
 void ThreadWorker() {
     while (true) {
@@ -40,8 +52,7 @@ void ThreadWorker() {
             std::unique_lock<std::mutex> lock(queueMutex);
             condition.wait(lock, [] { return !taskQueue.empty() || stop.load(); });
 
-            if (stop && taskQueue.empty())
-                break;
+            if (stop && taskQueue.empty()) break;
 
             client = taskQueue.front();
             taskQueue.pop();
@@ -56,11 +67,10 @@ void ThreadWorker() {
 // 클라이언트 처리 함수
 void HandleClient(sf::TcpSocket* client) {
     sf::Packet packet;
-    std::string message = "Welcome to the room!";
-    packet << message;
+    packet << "Welcome to the room!";
 
     if (client->send(packet) != sf::Socket::Done) {
-        std::cerr << "Error sending message to client" << std::endl;
+        Log("Error sending message to client.");
         return;
     }
 
@@ -70,18 +80,18 @@ void HandleClient(sf::TcpSocket* client) {
             std::string clientMessage;
             receivedPacket >> clientMessage;
 
-            std::cout << "Client says: " << clientMessage << std::endl;
+            Log("Client says: " + clientMessage);
 
             auto it = commandHandlers.find(clientMessage);
             if (it != commandHandlers.end()) {
                 it->second(clientMessage, client);
             }
             else {
-                std::cerr << "Unknown command: " << clientMessage << std::endl;
+                Log("Unknown command: " + clientMessage);
             }
         }
         else {
-            std::cerr << "Client disconnected." << std::endl;
+            Log("Client disconnected.");
             break;
         }
     }
@@ -100,7 +110,6 @@ void HandleMatchingRequest(const std::string& data, sf::TcpSocket* client) {
 // 매칭 로직
 void StartMatching(sf::TcpSocket* client) {
     std::lock_guard<std::mutex> lock(matchingMutex);
-
     matchingQueue.push(client);
 
     if (matchingQueue.size() >= 2) {
@@ -109,7 +118,7 @@ void StartMatching(sf::TcpSocket* client) {
         sf::TcpSocket* player2 = matchingQueue.front();
         matchingQueue.pop();
 
-        std::cout << "매칭 완료: 두 플레이어 연결됨." << std::endl;
+        Log("매칭 완료: 두 플레이어 연결됨.");
 
         sf::Packet packet1;
         packet1 << "MATCH_FOUND" << "You are matched with Player 2";
@@ -120,18 +129,18 @@ void StartMatching(sf::TcpSocket* client) {
         player2->send(packet2);
     }
     else {
-        std::cout << "매칭 대기 중..." << std::endl;
+        Log("매칭 대기 중...");
     }
 }
 
 // 게임 시작 명령 처리
 void StartGame(const std::string& data, sf::TcpSocket* client) {
-    std::cout << "Game started for client: " << client << " with data: " << data << std::endl;
+    Log("Game started for client: " + std::to_string(reinterpret_cast<std::uintptr_t>(client)) + " with data: " + data);
 }
 
 // 턴 설정 명령 처리
 void SetTurn(const std::string& data, sf::TcpSocket* client) {
-    std::cout << "Turn set for client: " << client << " with data: " << data << std::endl;
+    Log("Turn set for client: " + std::to_string(reinterpret_cast<std::uintptr_t>(client)) + " with data: " + data);
 }
 
 // 콘솔 입력 모니터링
@@ -140,7 +149,7 @@ void MonitorConsoleInput() {
     while (true) {
         std::getline(std::cin, input);
         if (input == "exit") {
-            std::cout << "서버 종료 요청을 받았습니다." << std::endl;
+            Log("서버 종료 요청을 받았습니다.");
 
             {
                 std::lock_guard<std::mutex> lock(queueMutex);
@@ -153,18 +162,20 @@ void MonitorConsoleInput() {
 }
 
 int main() {
+    // 명령어 핸들러 등록
     commandHandlers["START_GAME"] = StartGame;
     commandHandlers["SET_TURN"] = SetTurn;
     commandHandlers["START_MATCHING"] = HandleMatchingRequest;
 
     sf::TcpListener listener;
     if (listener.listen(53000) != sf::Socket::Done) {
-        std::cerr << "Error: Could not listen on port 53000" << std::endl;
+        Log("Error: Could not listen on port 53000");
         return -1;
     }
 
-    std::cout << "서버가 실행 중입니다. 클라이언트를 기다립니다..." << std::endl;
+    Log("서버가 실행 중입니다. 클라이언트를 기다립니다...");
 
+    // 스레드 풀 생성
     const int THREAD_COUNT = 4;
     std::vector<std::thread> threadPool;
     for (int i = 0; i < THREAD_COUNT; ++i) {
@@ -173,11 +184,12 @@ int main() {
 
     std::thread consoleThread(MonitorConsoleInput);
 
+    // 클라이언트 대기
     while (!stop) {
         sf::TcpSocket* client = new sf::TcpSocket();
 
         if (listener.accept(*client) == sf::Socket::Done) {
-            std::cout << "새 클라이언트가 연결되었습니다!" << std::endl;
+            Log("새 클라이언트가 연결되었습니다!");
             {
                 std::lock_guard<std::mutex> lock(queueMutex);
                 taskQueue.push(client);
@@ -189,6 +201,7 @@ int main() {
         }
     }
 
+    // 서버 종료 처리
     {
         std::lock_guard<std::mutex> lock(queueMutex);
         stop = true;
@@ -205,6 +218,7 @@ int main() {
         consoleThread.join();
     }
 
-    std::cout << "서버가 종료되었습니다." << std::endl;
+    Log("서버가 종료되었습니다.");
+    logFile.close();
     return 0;
 }
